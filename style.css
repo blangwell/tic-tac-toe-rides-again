@@ -9,7 +9,7 @@
 
 body {
   background-image: url('./assets/img/linedPaper.jpg');
-  cursor: url('./assets/img/pencilSmall.png'), auto;
+  cursor: url('./assets/img/pencilCursor.png'), auto;
 }
 main {
   display: flex;
