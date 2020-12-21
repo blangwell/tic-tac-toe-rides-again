@@ -24,7 +24,7 @@ main {
   height: 100px ;
   border: 1px solid black;
 }
-.square:hover {
+.square:hover, .win {
   background-color: rgb(0, 225, 0, .5);
 }
 

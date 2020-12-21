@@ -3,16 +3,8 @@ const gameMessage = document.querySelector('.game-message');
 const resetButton = document.querySelector('.reset');
 let gameOver = false;
 let turnCount = 1;
-const xTurns = [];
-const oTurns = [];
-
-function resetBoard() {
-  boardSquares.forEach(square => {
-    square.className = 'square';
-    turnCount = 1;
-    gameOver = false;
-  })
-}
+let xTurns = [];
+let oTurns = [];
 
 const winCombos = [
   ['tl', 'tm', 'tr'], 
@@ -25,13 +17,23 @@ const winCombos = [
 
   ['tl', 'mm', 'br'],
   ['tr', 'mm', 'bl']
-]
+];
+
+function resetBoard() {
+  boardSquares.forEach(square => {
+    square.className = 'square';
+    turnCount = 1;
+    xTurns = [];
+    oTurns = [];
+    gameOver = false;
+  });
+};
 
 function checkForWin(player, playerMoves) {
   winCombos.forEach(combo => {
     if (combo.every(square => playerMoves.includes(square))) {
       combo.forEach(square => {
-        document.getElementById(square).style.backgroundColor = 'blue';
+        document.getElementById(square).classList.add('win');
       })  
       gameMessage.innerText = `${player} Wins!`;
       gameOver = true;
@@ -39,8 +41,8 @@ function checkForWin(player, playerMoves) {
       gameMessage.innerText = "Cat's Game!";
       gameOver = true;
     }
-  })
-}
+  });
+};
 
 function takeTurn (square) {
   if (gameOver === false && !square.classList.contains('filled')) {
@@ -57,7 +59,7 @@ function takeTurn (square) {
     }
     turnCount++;
   }
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   boardSquares.forEach(square => {
@@ -67,5 +69,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   resetButton.addEventListener('click', () => {
     resetBoard();
-  })
+  });
 });
