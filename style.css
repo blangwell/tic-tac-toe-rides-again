@@ -9,6 +9,7 @@
 
 body {
   background-image: url('./assets/img/linedPaper.jpg');
+  cursor: url('./assets/img/pencilSmall.png'), auto;
 }
 main {
   display: flex;
@@ -16,6 +17,7 @@ main {
   justify-content: center;
   align-items: center;
 }
+
 .page-title, .game-message {
   font-family: 'Beth', cursive;
 }
