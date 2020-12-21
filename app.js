@@ -1,6 +1,7 @@
 const boardSquares = document.querySelectorAll('.square');
 const gameMessage = document.querySelector('.game-message');
 const resetButton = document.querySelector('.reset');
+
 let gameOver = false;
 let turnCount = 1;
 let xTurns = [];
@@ -35,12 +36,12 @@ function checkForWin(player, playerMoves) {
     if (combo.every(square => playerMoves.includes(square))) {
       combo.forEach(square => {
         document.getElementById(square).classList.add('win');
-      })  
+      });
       gameMessage.innerText = `${player} Wins!`;
       gameOver = true;
-    } else if (turnCount === 9) {
-      gameMessage.innerText = "Cat's Game!";
-      gameOver = true;
+    } else if (turnCount === 9 && gameOver === false) {
+        gameMessage.innerText = "Cat's Game!";
+        gameOver = true;
     }
   });
 };
