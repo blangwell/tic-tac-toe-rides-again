@@ -1,13 +1,23 @@
-/* .game-board {
-  display: grid;
-  grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr
-} */
+@font-face {
+  font-family: 'Beth';
+  src: url('./assets/BethEllen-Regular.ttf'); 
+} 
 
+:root {
+  --pink: rgba(244, 139, 127, 0.5);
+}
+
+body {
+  background-image: url('./assets/img/linedPaper.jpg');
+}
 main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.page-title, .game-message {
+  font-family: 'Beth', cursive;
 }
 .game-board {
   display: flex;
@@ -21,18 +31,33 @@ main {
 }
 .square {
   width: 100px;
-  height: 100px ;
-  border: 1px solid black;
+  height: 100px;
 }
 .square:hover, .win {
-  background-color: rgb(0, 225, 0, .5);
+  background-color: var(--pink);
+}
+#tl, #tm, #tr, #ml, #mm, #mr {
+  border-bottom: 3px solid black;
+}
+#tm, #mm, #bm {
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+}
+.reset {
+  font-size: 1.2em;
+  background-color: white;
+  border: 1px solid lightblue;
+}
+.reset:hover {
+  background-color: var(--pink);
+  cursor: pointer;
 }
 
 .xMove {
-  background-image: url('./img/transparentX.png');
+  background-image: url('./assets/img/transparentX.png');
   background-size: cover;
 }
 .oMove {
-  background-image: url('./img/transparentO.png');
+  background-image: url('./assets/img/transparentO.png');
   background-size: cover;
 }

@@ -25,6 +25,7 @@ function resetBoard() {
     turnCount = 1;
     xTurns = [];
     oTurns = [];
+    gameMessage.innerText = "It's X's Turn";
     gameOver = false;
   });
 };
