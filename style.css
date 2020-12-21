@@ -47,7 +47,7 @@ main {
 }
 .reset {
   font-size: 1.2em;
-  background-color: white;
+  background-color: rgb(255, 255, 255, .5);
   border: 1px solid rgb(116, 185, 208);
 }
 .reset:hover {
