@@ -2,8 +2,12 @@
   display: grid;
   grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr
 } */
-.page-title, .game-message {
-  text-align: center;
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .game-board {
   display: flex;

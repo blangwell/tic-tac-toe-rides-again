@@ -1,49 +1,71 @@
 const boardSquares = document.querySelectorAll('.square');
 const gameMessage = document.querySelector('.game-message');
+const resetButton = document.querySelector('.reset');
+let gameOver = false;
 let turnCount = 1;
 const xTurns = [];
 const oTurns = [];
-let gameOver = false;
+
+function resetBoard() {
+  boardSquares.forEach(square => {
+    square.className = 'square';
+    turnCount = 1;
+    gameOver = false;
+  })
+}
+
+const winCombos = [
+  ['tl', 'tm', 'tr'], 
+  ['ml', 'mm', 'mr'],
+  ['bl', 'bm', 'br'],
+
+  ['tl', 'ml', 'bl'],
+  ['tm', 'mm', 'bm'],
+  ['tr', 'mr', 'br'],
+
+  ['tl', 'mm', 'br'],
+  ['tr', 'mm', 'bl']
+]
 
 function checkForWin(player, playerMoves) {
-  if (
-    ['tl', 'tm', 'tr'].every(square => playerMoves.includes(square)) || 
-    ['ml', 'mm', 'mr'].every(square => playerMoves.includes(square)) ||
-    ['bl', 'bm', 'br'].every(square => playerMoves.includes(square)) ||
-
-    ['tl', 'ml', 'bl'].every(square => playerMoves.includes(square)) ||
-    ['tm', 'mm', 'bm'].every(square => playerMoves.includes(square)) ||
-    ['tr', 'mr', 'br'].every(square => playerMoves.includes(square)) ||
-
-    ['tl', 'mm', 'br'].every(square => playerMoves.includes(square)) ||
-    ['tr', 'mm', 'bl'].every(square => playerMoves.includes(square))
-  ) {
-    gameMessage.innerText = `${player} Wins!`
-    gameOver = true;
-  }
+  winCombos.forEach(combo => {
+    if (combo.every(square => playerMoves.includes(square))) {
+      combo.forEach(square => {
+        document.getElementById(square).style.backgroundColor = 'blue';
+      })  
+      gameMessage.innerText = `${player} Wins!`;
+      gameOver = true;
+    } else if (turnCount === 9) {
+      gameMessage.innerText = "Cat's Game!";
+      gameOver = true;
+    }
+  })
 }
 
 function takeTurn (square) {
-  console.log('turnCount', turnCount);
-  if (turnCount % 2 !== 0) {
-    gameMessage.innerText = "It's O's Turn";
-    square.classList.add('xMove')
-    xTurns.push(square.id);
-    checkForWin('X', xTurns);
-  } else {
-    gameMessage.innerText = "It's X's Turn";
-    square.classList.add('oMove')
-    oTurns.push(square.id);
-    checkForWin('O', oTurns);
+  if (gameOver === false && !square.classList.contains('filled')) {
+    if (turnCount % 2 !== 0) {
+      gameMessage.innerText = "It's O's Turn";
+      square.classList.add('xMove', 'filled');
+      xTurns.push(square.id);
+      checkForWin('X', xTurns);
+    } else {
+      gameMessage.innerText = "It's X's Turn";
+      square.classList.add('oMove', 'filled');
+      oTurns.push(square.id);
+      checkForWin('O', oTurns);
+    }
+    turnCount++;
   }
-  turnCount++;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   boardSquares.forEach(square => {
     square.addEventListener('click', e => {
-      console.log(e.target);
       takeTurn(e.target);
     });
   });
+  resetButton.addEventListener('click', () => {
+    resetBoard();
+  })
 });
